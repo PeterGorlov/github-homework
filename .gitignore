@@ -24,3 +24,6 @@ hs_err_pid*
 
 #HomeWork
 .idea
+
+#MacOS
+.DS_Store
