@@ -8,8 +8,8 @@ import java.util.Arrays;
 public class WerewolfSquirrel {
     private static final String PATH = "/Users/hoho/Documents/IdeaProjects/JournalOfEvents/journalEvents_ru.csv";
 
-    private static boolean[] booleanArray = new boolean[0];
-    private static String[][] actionsArray = new String[0][];
+    private static boolean[] booleanArray = null;
+    private static String[][] actionsArray = null;
 
 
     private static int countActions = 0;
@@ -53,22 +53,20 @@ public class WerewolfSquirrel {
         int countLine = 0;
         String line = "";
         int lengthArray = counterArrayLength(PATH);
-        String[][] events = new String[lengthArray][];
-        boolean[] squirrels = new boolean[lengthArray];
+        actionsArray = new String[lengthArray][];
+        booleanArray = new boolean[lengthArray];
         try {
             BufferedReader br = new BufferedReader(new FileReader(PATH));
             while ((line = br.readLine()) != null) {
                 String[] arrayLine = line.split(",");
-                events[countLine] = Arrays.copyOf(arrayLine, arrayLine.length - 1);
-                squirrels[countLine] = Boolean.parseBoolean(arrayLine[arrayLine.length - 1]);
+                actionsArray[countLine] = Arrays.copyOf(arrayLine, arrayLine.length - 1);
+                booleanArray[countLine] = Boolean.parseBoolean(arrayLine[arrayLine.length - 1]);
                 countLine++;
             }
         } catch (IOException e) {
             e.printStackTrace();
 
         }
-        actionsArray = Arrays.copyOf(events, events.length);
-        booleanArray = Arrays.copyOf(squirrels, squirrels.length);
 
     }
 
@@ -84,13 +82,13 @@ public class WerewolfSquirrel {
             int squirrelAction = 0;
             for (int index = 0; index < action.length; index++) {
                 if (action[index]) {
-                    if (simpleSearch(line[index], uniqAction[unAction])) {
+                    if (isActionPresent(line[index], uniqAction[unAction])) {
                         squirrelAction++;
                     } else {
                         squirrelNoAction++;
                     }
                 } else if (!action[index]) {
-                    if (simpleSearch(line[index], uniqAction[unAction])) {
+                    if (isActionPresent(line[index], uniqAction[unAction])) {
                         noSquirrelAction++;
                     } else {
                         noSquirrelNoAction++;
@@ -105,7 +103,7 @@ public class WerewolfSquirrel {
         }
     }
 
-    public static boolean simpleSearch(String[] array, String elements) {
+    public static boolean isActionPresent(String[] array, String elements) {
         for (int i = 0; i < array.length; i++) {
             if (array[i].equals(elements)) {
                 return true;
@@ -116,7 +114,6 @@ public class WerewolfSquirrel {
 
 
     public static void addArrayActionDistinct(String[][] array) {
-        countActions = array[0].length;
         int count = 0;
         for (int outerArray = 0; outerArray < array.length; outerArray++) {
             uniqueActions = Arrays.copyOf(uniqueActions, uniqueActions.length + array[outerArray].length);
