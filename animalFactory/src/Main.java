@@ -9,6 +9,8 @@ public class Main {
             if (AnimalFactory.getAnimalByKey(scanner) == null) {
                 System.out.println("Не могу создать Animal");
             } else {
+                Animal animal = AnimalFactory.getAnimalByKey(scanner);
+                System.out.println(animal.getName());
                 break;
             }
 

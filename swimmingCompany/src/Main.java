@@ -8,7 +8,7 @@ public class Main {
 
         System.out.println("rectangle.area= " + rectangle.getArea());
 
-        Cuboid cuboid = new Cuboid(5,10,5);
+        Cuboid cuboid = new Cuboid(5, 10, 5);
 
         System.out.println("cuboid.width= " + cuboid.getWidth());
 
