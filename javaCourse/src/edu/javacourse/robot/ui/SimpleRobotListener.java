@@ -1,0 +1,17 @@
+package edu.javacourse.robot.ui;
+
+import edu.javacourse.robot.RobotListener;
+
+// Наш класс реализует интерфейс robotListener
+public class SimpleRobotListener implements RobotListener {
+
+    @Override
+    public void startMove(double x, double y) {
+        System.out.println("Робот начал движение, координаты:" + x + "," + y);
+    }
+
+    @Override
+    public void endMove(double x, double y) {
+        System.out.println("Робот закончил движение, координаты:" + x + "," + y);
+    }
+}
