@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class MyPhoneBook {
-    private ArrayList<PhoneRecord> phoneNumbers;
+    private final ArrayList<PhoneRecord> phoneNumbers;
 
     public MyPhoneBook(ArrayList<PhoneRecord> phoneNumbers) {
         this.phoneNumbers = phoneNumbers;
@@ -40,7 +40,9 @@ public class MyPhoneBook {
                     ", phone='" + phone + '\'' +
                     '}';
         }
+
     }
+
 
     public void addPhoneNumber(String name, String phone) {
         phoneNumbers.add(new PhoneRecord(name, phone));
@@ -49,7 +51,24 @@ public class MyPhoneBook {
     public void printPhoneBook() {
         System.out.println(phoneNumbers.toString());
     }
-    public void sortByName(){
-        
+
+    public void sortByName() {
+        phoneNumbers.sort(new Comparator<>() {
+            @Override
+            public int compare(PhoneRecord o1, PhoneRecord o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+
+    }
+
+    public void sortByPhoneNumber() {
+        phoneNumbers.sort((o1, o2) -> {
+            int result = o1.getName().compareTo(o2.getName());
+            if (result == 0) {
+                return o1.getPhone().compareTo(o2.getPhone());
+            }
+            return result;
+        });
     }
 }
