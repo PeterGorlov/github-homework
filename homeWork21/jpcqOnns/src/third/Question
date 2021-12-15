@@ -1,0 +1,3 @@
+3) Static nested classes can have only static members in them. True OR False?
+
+Ложь. Статические вложенные классы могут иметь как статические, так и нестатические члены.
