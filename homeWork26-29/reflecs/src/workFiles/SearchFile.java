@@ -9,17 +9,13 @@ import java.util.Comparator;
 import java.util.List;
 
 public class SearchFile {
-    private final int LENGTH_DIRECTORY = 37;
     private final int EXPANSION_FILE = 5; //.java
-    public static final String PATH_DIRECTORY = "/home/peter/IdeaProjects/reflecs/src"; //LENGTH_DIRECTORY
+    public static String PATH_DIRECTORY = null;
 
     public List<Class> addClassList(File rootFile) {
         List<String> list = new ArrayList<>();
-        if (PATH_DIRECTORY.equals(String.valueOf(rootFile))) {
-            addClassList(rootFile, list);
-        } else {
-            System.out.println("No correctly Path");
-        }
+        PATH_DIRECTORY = String.valueOf(rootFile);
+        addClassList(rootFile, list);
         List<String> rtcp = replaceToClassPath(list);
         return replaceToClassList(rtcp);
     }
@@ -34,7 +30,7 @@ public class SearchFile {
                     } else {
                         if (file.getName().toLowerCase().endsWith(".java")) {
                             fileList.add(String.valueOf(file)
-                                    .substring(LENGTH_DIRECTORY,
+                                    .substring(countLengthPat(PATH_DIRECTORY),
                                             String.valueOf(file).length() - EXPANSION_FILE));
                         }
                     }
@@ -91,4 +87,9 @@ public class SearchFile {
             return 0;
         }
     };
+
+    private int countLengthPat(String str) {
+
+        return str.length() + 1;
+    }
 }
